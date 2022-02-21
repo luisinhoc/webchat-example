@@ -1,0 +1,62 @@
+<div class="chat-popup" #chatform id="chatform" *ngIf="!chatClosed">
+  <div class="center">
+    <div class="chat">
+      <div class="contact bar">
+        <div class="pic bot"></div>
+        <div class="name">{{ chatBotName | uppercase }}</div>
+        <mat-icon aria-hidden="false" (click)="chatAction()">close</mat-icon>
+      </div>
+      <div class="messages" #chat id="chat">
+        <div *ngFor="let item of messages; let last = last">
+          <ng-container
+            *ngIf="item.from_user === 'user'; then me; else bot"
+          ></ng-container>
+
+          <ng-template #me>
+            <div class="message parker">
+              {{ item.message }}
+              <span class="time-message">
+                {{ item.timestamp | date: "shortTime" }}
+              </span>
+            </div>
+          </ng-template>
+
+          <ng-template #bot>
+            <div class="message stark">
+              {{ item.message }}
+              <span class="time-message">
+                {{ item.timestamp | date: "shortTime" }}
+              </span>
+            </div>
+          </ng-template>
+          {{ last ? scrollToBottom() : "" }}
+        </div>
+
+        <div class="spinner message" *ngIf="waiting">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+      </div>
+      <div class="input">
+        <input
+          placeholder="Type your message here!"
+          [(ngModel)]="message"
+          name="box"
+          #box
+          (keyup.enter)="sendMessage(); box.value = ''"
+          type="text"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="chat-icon" *ngIf="chatClosed" (click)="chatAction()">
+  <span>
+    <mat-card>
+      <mat-card-title> Talk to me! </mat-card-title>
+    </mat-card>
+  </span>
+  <img src="../assets/images/chatbot.png" />
+</div>

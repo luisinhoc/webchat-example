@@ -1,0 +1,344 @@
+@import url("https://fonts.googleapis.com/css?family=Red+Hat+Display:400,500,900&display=swap");
+@import "../assets/styles/variables.scss";
+@import url("../assets/styles/spinner-bounce.scss");
+
+body,
+html {
+  font-family: Red hat Display, sans-serif;
+  font-weight: 400;
+  line-height: 1.25em;
+  letter-spacing: 0.025em;
+  color: $text-1;
+  background: $background;
+}
+
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #ff0000;
+}
+
+.center {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 9;
+}
+
+.pic {
+  width: 4rem;
+  height: 4rem;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+
+.contact {
+  position: relative;
+  margin-bottom: 1rem;
+  padding-left: 5rem;
+  height: 4.5rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .pic {
+    position: absolute;
+    left: 0;
+  }
+
+  .name {
+    font-size: small;
+    font-weight: 500;
+    margin-bottom: 0.125rem;
+  }
+
+  mat-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+  }
+
+  .message,
+  .seen {
+    font-size: 0.9rem;
+    color: $text-3;
+  }
+
+  .badge {
+    box-sizing: border-box;
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    padding-top: 0.125rem;
+    border-radius: 1rem;
+
+    top: 0;
+    left: 2.5rem;
+    background: $text-1;
+    color: white;
+  }
+}
+
+.contacts {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-6rem, -50%);
+
+  width: 24rem;
+  height: 32rem;
+  padding: 1rem 2rem 1rem 1rem;
+  box-sizing: border-box;
+  border-radius: 1rem 0 0 1rem;
+
+  cursor: pointer;
+
+  background: white;
+  box-shadow: 0 0 8rem 0 rgba(black, 0.1), 2rem 2rem 4rem -3rem rgba(black, 0.5);
+
+  transition: transform 500ms;
+
+  h2 {
+    margin: 0.5rem 0 1.5rem 5rem;
+  }
+
+  .fa-bars {
+    position: absolute;
+    left: 2.25rem;
+
+    color: $text-3;
+    transition: color 200ms;
+
+    &:hover {
+      color: $text-2;
+    }
+  }
+
+  .contact:last-child {
+    margin: 0;
+  }
+
+  &:hover {
+    transform: translate(-23rem, -50%);
+  }
+}
+
+.chat {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 24rem;
+  height: 38rem;
+  z-index: 2;
+  box-sizing: border-box;
+  border-radius: 1rem;
+
+  background: white;
+  box-shadow: 0 0 8rem 0 rgba(black, 0.1), 0rem 2rem 4rem -3rem rgba(black, 0.5);
+
+  .contact.bar {
+    flex-basis: 3.5rem;
+    flex-shrink: 0;
+    margin: 1rem;
+    box-sizing: border-box;
+  }
+
+  .messages {
+    padding: 1rem;
+    background: $background;
+    flex-shrink: 2;
+    overflow-y: auto;
+    height: 470px;
+    box-shadow: inset 0 2rem 2rem -2rem rgba(black, 0.05),
+      inset 0 -2rem 2rem -2rem rgba(black, 0.05);
+
+    .message {
+      box-sizing: border-box;
+      padding: 0.5rem 1rem;
+      white-space: pre-wrap;
+      font-size: medium;
+      margin: 1rem;
+      background: #fff;
+      border-radius: 1.125rem 1.125rem 1.125rem 0;
+      min-height: 2.25rem;
+      width: fit-content;
+      max-width: 66%;
+      word-break: break-word;
+      box-shadow: 0 0 2rem rgba(black, 0.075),
+        0rem 1rem 1rem -1rem rgba(black, 0.1);
+
+      &.parker {
+        margin: 1rem 1rem 1rem auto;
+        border-radius: 1.125rem 1.125rem 0 1.125rem;
+        background: $text-1;
+        color: white;
+      }
+
+      .typing {
+        display: inline-block;
+        width: 0.8rem;
+        height: 0.8rem;
+        margin-right: 0rem;
+        box-sizing: border-box;
+        background: #ccc;
+        border-radius: 50%;
+
+        &.typing-1 {
+          animation: typing 3s infinite;
+        }
+        &.typing-2 {
+          animation: typing 3s 250ms infinite;
+        }
+        &.typing-3 {
+          animation: typing 3s 500ms infinite;
+        }
+      }
+    }
+
+    .alert {
+      background: #dc35458c !important;
+      img {
+        width: 25px;
+        height: 25px;
+        position: absolute;
+        display: inline-flex;
+        bottom: 15px;
+        right: 15px;
+      }
+    }
+  }
+
+  .input {
+    box-sizing: border-box;
+    flex-basis: 4rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem 0 0.5rem;
+
+    i {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      color: $text-2;
+      cursor: pointer;
+      transition: color 200ms;
+
+      &:hover {
+        color: $text-1;
+      }
+    }
+
+    input {
+      border: none;
+      background-image: none;
+      background-color: white;
+      padding: 0.5rem 1rem;
+      flex-grow: 2;
+
+      font-family: Red hat Display, sans-serif;
+      font-weight: 400;
+      letter-spacing: 0.025em;
+
+      &:placeholder {
+        color: $text-3;
+      }
+    }
+  }
+}
+
+@keyframes typing {
+  0%,
+  75%,
+  100% {
+    transform: translate(0, 0.25rem) scale(0.9);
+    opacity: 0.5;
+  }
+
+  25% {
+    transform: translate(0, -0.25rem) scale(1);
+    opacity: 1;
+  }
+}
+
+.pic.bot {
+  background-image: url("../assets/images/chatbot.png");
+}
+
+.time-message {
+  display: flex;
+  font-size: x-small;
+  font-weight: 300;
+}
+
+.chat-icon {
+  width: 100px;
+  height: 100px;
+  bottom: 10px;
+  right: 10px;
+  position: absolute;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  cursor: pointer;
+  img {
+    width: inherit;
+    height: inherit;
+  }
+  span {
+    position: absolute;
+    bottom: 70px;
+    right: 65px;
+    width: max-content;
+    border-radius: 35px 10em 10%;
+  }
+  mat-card {
+    border-radius: 15px 1em 1%;
+  }
+  mat-card-title {
+    font-size: medium;
+  }
+}
+
+.chat-icon:hover {
+  cursor: pointer;
+  animation-name: bounce;
+  -moz-animation-name: bounce;
+}
+
+@keyframes bounce {
+  0%,
+  100%,
+  20%,
+  50%,
+  80% {
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+  40% {
+    -webkit-transform: translateY(-30px);
+    -ms-transform: translateY(-30px);
+    transform: translateY(-30px);
+  }
+  60% {
+    -webkit-transform: translateY(-15px);
+    -ms-transform: translateY(-15px);
+    transform: translateY(-15px);
+  }
+}
